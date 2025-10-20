@@ -12,7 +12,7 @@
 	},
 	"d1_databases": [
 		{
-			"binding": "_6tssattendancedb",
+			"binding": "DB",
 			"database_name": "6tssattendancedb",
 			"database_id": "cfb3948d-6b95-42d1-b820-f88c3de0835d",
 			"remote": true
