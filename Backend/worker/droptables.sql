@@ -1,0 +1,11 @@
+DROP TABLE attendance;
+DROP TABLE attendance_leaders;
+DROP TABLE attendance_scouts;
+DROP TABLE badges;
+DROP TABLE badges_scouts;
+DROP TABLE crew_history;
+DROP TABLE leaderinfo;
+DROP TABLE leaders;
+DROP TABLE notices;
+DROP TABLE rank_history;
+DROP TABLE scouts;
