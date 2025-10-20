@@ -9,7 +9,15 @@
 	"compatibility_date": "2025-10-11",
 	"observability": {
 		"enabled": true
-	}
+	},
+	"d1_databases": [
+		{
+			"binding": "_6tssattendancedb",
+			"database_name": "6tssattendancedb",
+			"database_id": "cfb3948d-6b95-42d1-b820-f88c3de0835d",
+			"remote": true
+		}
+	]
 	/**
 	 * Smart Placement
 	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
