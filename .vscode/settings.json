@@ -1,0 +1,16 @@
+{
+  "dbcode.connections": [
+    {
+      "connectionId": "_uQM8PVqV5i9uD8255ITc",
+      "name": "6tssattendancedb",
+      "driver": "d1",
+      "color": "#0085CC",
+      "socket": "cfb3948d-6b95-42d1-b820-f88c3de0835d",
+      "username": "jeanmichelwilliams17@gmail.com",
+      "password": "",
+      "savePassword": "secretStorage",
+      "readOnly": false,
+      "connectionType": "socket"
+    }
+  ]
+}
