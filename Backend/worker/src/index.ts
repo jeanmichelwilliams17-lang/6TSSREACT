@@ -1,16 +1,14 @@
  import { Hono } from 'hono'
 
- type Bindings = {
-	DB: D1Database
- }
+import allScouts from './routes/scouts';
+import { Env } from './env';
+import scoutManagementGet from './routes/managementpagescouts';
 
- const app = new Hono< {Bindings: Bindings } >();
+ const app = new Hono< {Bindings: Env } >();
 
- app.get("/", async c => {
-	const resp = await c.env.DB.prepare("SELECT first_name, last_name FROM scouts WHERE crew IN ('Crew A');").all();
+ app.route("/scouts", allScouts);
 
-	const data = resp.results;
-	return(c.json({data}))
- })
+ app.route("/scoutmanagement", scoutManagementGet);
+ 
 
 export default app
