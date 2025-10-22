@@ -13,6 +13,15 @@
 			"database_id": "cfb3948d-6b95-42d1-b820-f88c3de0835d",
 			"remote": true
 		}
-	]
+	],
+	"vars": {
+    "SUPABASE_URL": "https://lnrugfhbrhzvkmyxzytr.supabase.co",
+    "SUPABASE_SERVICE_ROLE_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxucnVnZmhicmh6dmtteXh6eXRyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2MDk3MTk2MywiZXhwIjoyMDc2NTQ3OTYzfQ.7RKQ2vu9EikgNmqHg0ELym6XSt7If_sqQBoF95jzDbE",
+		"SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxucnVnZmhicmh6dmtteXh6eXRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5NzE5NjMsImV4cCI6MjA3NjU0Nzk2M30.TwOIO9JY8H-FRYE0_OsBfJQ9JJKLykKhnmbfV5yCS3g"
+  }
+
+
+
+
 
 }

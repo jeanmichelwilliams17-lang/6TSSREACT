@@ -21,6 +21,11 @@ import {
 } from "@/components/ui/select"
 import type Scoutmanagementscout from "@/Types/DB_types"
 
+interface AddScoutFormProps{
+  setData: React.Dispatch<React.SetStateAction<Scoutmanagementscout[]>>
+}
+
+const backendApi = import.meta.env.VITE_BACKEND_API;
 
 const profileFormSchema = z.object({
 
@@ -55,11 +60,10 @@ const profileFormSchema = z.object({
 })
 type ProfileFormValues = z.infer<typeof profileFormSchema>
 
-interface AddScoutFormProps{
-  setData: React.Dispatch<React.SetStateAction<Scoutmanagementscout[]>>
-}
+
 
 export default function AddScoutForm({setData}: AddScoutFormProps) {
+   
 
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
@@ -73,9 +77,31 @@ export default function AddScoutForm({setData}: AddScoutFormProps) {
     mode: "onChange",
   })
 
+  
   function onSubmit(data: ProfileFormValues) {
-    console.log(data)
-  }
+    console.log(data);
+      
+
+      async function createScout(){
+      const response = await fetch(`${backendApi}/createScout`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        }
+        );
+       if (!response.ok) {
+          throw new Error("failed to send scout");
+        }
+        console.log(response)
+        }
+        
+        createScout();
+      }
+
+  
 
 
   return (

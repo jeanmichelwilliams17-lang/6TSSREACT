@@ -21,6 +21,7 @@
 		"wrangler": "^4.43.0"
 	},
 	"dependencies": {
+		"@supabase/supabase-js": "^2.76.1",
 		"drizzle-orm": "^0.44.6",
 		"hono": "^4.10.1"
 	}
