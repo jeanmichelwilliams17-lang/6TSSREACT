@@ -12,17 +12,10 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Card } from "./ui/card"
-import { 
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import type { Scoutmanagementscout } from "@/Types/DB_types";
+import type { Leader } from "@/Types/DB_types"
 
-interface AddScoutFormProps{
-  setData: React.Dispatch<React.SetStateAction<Scoutmanagementscout[]>>
+interface AddLeaderFormProps{
+  setData: React.Dispatch<React.SetStateAction<Leader[]>>
 }
 
 const backendApi = import.meta.env.VITE_BACKEND_API;
@@ -47,12 +40,17 @@ const profileFormSchema = z.object({
       message: "lastname must not be longer than 30 characters.",
     }),
 
-    crew: z
-    .enum(["Falcons", "Kingfishers", "Dophins", "Orcas", "Barracudas", "Swifts", "Marlins", "Terns", "Seals", "Junior Executive", "Senior Executive", "crewless", "Alpha", "Beta", "Charlie", "Delta"
-    ]),
+    section: z
+    .string()
+    .min(2, {
+      message: "firstname must be at least 2 characters.",
+    }),
 
     rank: z
-    .enum(["Scout", "Waister", "Assistant Crew Leader", "Crew Leader", "Junior Executive", "Senior Executive", "Venture Scout"]),
+    .string()
+    .min(2, {
+      message: "firstname must be at least 2 characters.",
+    }),
 
   email: z
     .string()
@@ -62,7 +60,7 @@ type ProfileFormValues = z.infer<typeof profileFormSchema>
 
 
 
-export default function AddScoutForm({setData}: AddScoutFormProps) {
+export default function AddLeaderForm({setData}: AddLeaderFormProps) {
    
 
   const form = useForm<ProfileFormValues>({
@@ -70,8 +68,8 @@ export default function AddScoutForm({setData}: AddScoutFormProps) {
     defaultValues: {
       first_name: "",
       last_name: "",
-      crew: "crewless",
-      rank: "Waister",
+      section: "",
+      rank: "",
       email: "",
     },
     mode: "onChange",
@@ -81,8 +79,8 @@ export default function AddScoutForm({setData}: AddScoutFormProps) {
   function onSubmit(data: ProfileFormValues) {
       
 
-      async function createScout(){
-      const response = await fetch(`${backendApi}/createScout`,
+      async function createLeader(){
+      const response = await fetch(`${backendApi}/createLeader`,
         {
           method: "POST",
           headers: {
@@ -94,13 +92,13 @@ export default function AddScoutForm({setData}: AddScoutFormProps) {
        if (!response.ok) {
           throw new Error("failed to send scout");
         }
-        const newScout = await response.json()
-        const {email, ...scoutForTable} = newScout;
+        const newLeader = await response.json()
+        const {email, ...leaderForTable} = newLeader;
         console.log(email);
-        setData((prev) => [...prev, scoutForTable]);
+        setData((prev) => [...prev, leaderForTable]);
 
         async function getScouts() {
-        const response = await fetch(`${backendApi}/scoutsmanagement`);
+        const response = await fetch(`${backendApi}/loadleaders`);
         if (!response.ok) {
           throw new Error("Failed to fetch scouts");
         } else {
@@ -111,7 +109,7 @@ export default function AddScoutForm({setData}: AddScoutFormProps) {
       getScouts();
         }
         
-        createScout();
+        createLeader();
       }
 
   
@@ -121,7 +119,7 @@ export default function AddScoutForm({setData}: AddScoutFormProps) {
     <div className="flex items-center justify-center h-screen" >
       
     <Card className="w-full max-w-[90%] self-center">
-      <header className="p-4 text-center font-bold text-2xl">Add Scout</header>
+      <header className="p-4 text-center font-bold text-2xl">Add Leader</header>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-[90%] space-y-6 self-center">
         
@@ -176,69 +174,34 @@ export default function AddScoutForm({setData}: AddScoutFormProps) {
 
       <FormField
       control={form.control}
-      name="crew"
+      name ="section"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Crew</FormLabel>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
-            <FormControl>
-              <SelectTrigger className="w-[90%] mx-auto">
-                <SelectValue placeholder="Select Crew" />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent>
-              <SelectItem value="Falcons">Falcons</SelectItem>
-              <SelectItem value="Kingfishers">Kingfishers</SelectItem>
-              <SelectItem value="Dophins">Dolphins</SelectItem>
-              <SelectItem value="Orcas">Orcas</SelectItem>
-              <SelectItem value="Barracudas">Barracudas</SelectItem>
-              <SelectItem value="Swifts">Swifts</SelectItem>
-              <SelectItem value="Marlins">Marlins</SelectItem>
-              <SelectItem value="Terns">Terns</SelectItem>
-              <SelectItem value="Seals">Seals</SelectItem>
-              <SelectItem value="Junior Executive">Junior Executive</SelectItem>
-              <SelectItem value="Senior Executive">Senior Executive</SelectItem>
-              <SelectItem value="crewless">Crewless</SelectItem>
-              <SelectItem value="Alpha">Alpha</SelectItem>
-              <SelectItem value="Beta">Beta</SelectItem>
-              <SelectItem value="Charlie">Charlie</SelectItem>
-              <SelectItem value="Delta">Delta</SelectItem>
-            </SelectContent>
-          </Select>
+          <FormLabel>Section</FormLabel>
+          <FormControl>
+            <Input placeholder="Please enter leaders Section" {...field} />
+          </FormControl>
           <FormMessage />
         </FormItem>
-      )}
+      )} 
       />
 
 
       <FormField
       control={form.control}
-      name="rank"
+      name ="rank"
       render={({ field }) => (
         <FormItem>
           <FormLabel>Rank</FormLabel>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
-            <FormControl>
-              <SelectTrigger className="w-[90%] mx-auto">
-                <SelectValue placeholder="Select Rank" />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent>
-              <SelectItem value="Scout">Scout</SelectItem>
-              <SelectItem value="Waister">Waister</SelectItem>
-              <SelectItem value="Assistant Crew Leader">Assistant Crew Leader</SelectItem>
-              <SelectItem value="Crew Leader">Crew Leader</SelectItem>
-              <SelectItem value="Junior Executive">Junior Executive</SelectItem>
-              <SelectItem value="Senior Executive">Senior Executive</SelectItem>
-              <SelectItem value="Venture Scout">Venture Scout</SelectItem>
-            </SelectContent>
-          </Select>
+          <FormControl>
+            <Input placeholder="Please enter leaders rank" {...field} />
+          </FormControl>
           <FormMessage />
         </FormItem>
-      )}
+      )} 
       />
 
-      <Button className="bg-blue-600" type="submit">Add Scout</Button>
+      <Button className="bg-blue-600" type="submit">Add Leader</Button>
       </form>
     </Form>
     </Card>

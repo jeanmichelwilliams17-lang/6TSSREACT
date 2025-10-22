@@ -1,6 +1,6 @@
 import LOGO from "../assets/6TSSLOGO.png"
 
-export default function LeaderHeader(){
+export default function ScoutHeader(){
 
 return(
 
@@ -13,9 +13,7 @@ return(
     
     <nav>
       <ul className="flex space-x-6">
-        <li><a href="/leaderDashboard" className="text-white hover:text-gray-300">Dashboard</a></li>
-        <li><a href="/leaderDashboard/managescouts" className="text-white hover:text-gray-300">Scout Management</a></li>
-        <li><a href="/leaderDashboard/addleaders" className="text-white hover:text-gray-300">Add Leader</a></li>
+        <li><a href="/scoutDashboard" className="text-white hover:text-gray-300">Dashboard</a></li>
       </ul>
     </nav>
   </div>

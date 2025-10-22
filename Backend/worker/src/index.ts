@@ -1,6 +1,8 @@
  import { Hono } from 'hono'
 import scoutManagementGet from './routes/managementpagescouts';
 import createScout from './routes/createScout';
+import loadLeaders from './routes/loadleaders';
+import createLeader from './routes/createLeader';
 type Bindings = {
   SUPABASE_URL: string
   SUPABASE_SERVICE_ROLE_KEY: string
@@ -12,8 +14,9 @@ const app = new Hono< {Bindings: Bindings } >();
 
 
  app.route("/scoutsmanagement", scoutManagementGet);
+ app.route("/loadleaders", loadLeaders)
  app.route("/createScout", createScout)
- 
+ app.route("/createLeader", createLeader)
 
 export default app
 

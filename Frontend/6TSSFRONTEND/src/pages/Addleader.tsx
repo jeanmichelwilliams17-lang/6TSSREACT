@@ -7,29 +7,29 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import LeaderHeader from "@/components/LeaderHeader";
-import type { Scoutmanagementscout } from "@/Types/DB_types";
+import type { Leader } from "@/Types/DB_types";
 import { useEffect, useState } from "react";
-import AddScoutForm from "@/components/AddScoutForm";
 import { Card } from "@/components/ui/card";
+import AddLeaderForm from "@/components/AddLeaderForm";
 
 
 
-export default function ScoutManagement(){
+export default function Addleaders(){
   const backendApi = import.meta.env.VITE_BACKEND_API; 
-  const [data, setData] =useState<Scoutmanagementscout[]>([])
+  const [data, setData] =useState<Leader[]>([])
 
   useEffect(
     () => {
-      async function getScouts() {
-        const response = await fetch(`${backendApi}/scoutsmanagement`);
+      async function getLeaders() {
+        const response = await fetch(`${backendApi}/loadleaders`);
         if (!response.ok) {
-          throw new Error("Failed to fetch scouts");
+          throw new Error("Failed to fetch leaders");
         } else {
           const data = await response.json();
           setData(data);
         }
       }
-      getScouts();
+      getLeaders();
     },
     [backendApi]
   )
@@ -40,7 +40,7 @@ export default function ScoutManagement(){
     <>
     <LeaderHeader></LeaderHeader>
 
-    <AddScoutForm setData={setData}></AddScoutForm>
+    <AddLeaderForm setData={setData}></AddLeaderForm>
 
     <Card className=" mb-10 mx-3">
     <Table>
@@ -48,16 +48,16 @@ export default function ScoutManagement(){
         <TableRow>
           <TableHead className="w-[100px]">First Name</TableHead>
           <TableHead>Last Name</TableHead>
-          <TableHead>Crew</TableHead>
+          <TableHead>Section</TableHead>
           <TableHead className="text-center">Rank</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {data.map((data) => (
-          <TableRow key={data.id}>
+          <TableRow key={data.leader_id}>
             <TableCell className="font-medium">{data.first_name}</TableCell>
             <TableCell>{data.last_name}</TableCell>
-            <TableCell>{data.crew}</TableCell>
+            <TableCell>{data.section}</TableCell>
             <TableCell className="text-center">{data.rank}</TableCell>
           </TableRow>
         ))}

@@ -3,6 +3,8 @@ import LoginPage from "./pages/login"
 import { useEffect, useState } from "react"
 import LeaderDashboard from "./pages/leaderDashboard"
 import ScoutManagement from "./pages/ScoutManagement"
+import Addleaders from "./pages/Addleader"
+import ScoutDashboard from "./pages/scoutDashboard"
 
 function App() {
 
@@ -26,6 +28,8 @@ function App() {
       <Route path="/login" element={<LoginPage setToken={setToken}/>} />
       <Route path="/leaderDashboard" element={<LeaderDashboard />} />
       <Route path="/leaderDashboard/managescouts" element={<ScoutManagement />} />
+      <Route path="/leaderDashboard/addleaders" element={<Addleaders />} />
+      <Route path="/scoutDashboard" element={<ScoutDashboard />} />
     </Routes>
   )
 }
