@@ -65,7 +65,6 @@ export default function LoginPage( {setToken}: LoginPageProps) {
       <img src={LOGO} alt="6TSSLOGO" className="size-15" />
       <p className="text-white text-2xl font-semibold">Tobattendance</p>
 
-      
     </div>
 </header>
 

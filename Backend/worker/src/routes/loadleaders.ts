@@ -28,7 +28,7 @@ loadLeaders.get("/", async (c) => {
   SUPABASE_SERVICE_ROLE_KEY: c.env.SUPABASE_SERVICE_ROLE_KEY
 }); 
   
-  const allLeaders = await db.select({ id: leaders.leader_id, first_name: leaders.first_name, last_name: leaders.last_name, section: leaders.section, rank: leaders.rank}).from(leaders).all();
+  const allLeaders = await db.select({ leader_id: leaders.leader_id, first_name: leaders.first_name, last_name: leaders.last_name, section: leaders.section, rank: leaders.rank}).from(leaders).all();
 
   return c.json(allLeaders);
 });

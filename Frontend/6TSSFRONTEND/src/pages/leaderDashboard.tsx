@@ -1,5 +1,6 @@
 import LeaderHeader from "@/components/LeaderHeader";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/lib/supabaseClient";
 import { useNavigate } from "react-router-dom";
 
 /*interface LeaderDashboardProps{
@@ -11,7 +12,9 @@ token: object
 export default function LeaderDashboard(){
    const navigate = useNavigate();
 
-  function handleLogout(){
+  async function  handleLogout(){
+    const { error } = await supabase.auth.signOut()
+    console.log(error);
     sessionStorage.removeItem('token')
     navigate('/login')
   }
