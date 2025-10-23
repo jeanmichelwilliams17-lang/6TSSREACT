@@ -15,7 +15,6 @@ export default function ScoutDashboard(){
   async function handleLogout(){
     const { error } = await supabase.auth.signOut()
         console.log(error);
-    sessionStorage.removeItem('token')
     navigate('/login')
   }
 

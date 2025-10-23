@@ -14,12 +14,9 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import LOGO from "../assets/6TSSLOGO.png"
 
-interface LoginPageProps{
-setToken: React.Dispatch<React.SetStateAction<object>>
 
-}
 
-export default function LoginPage( {setToken}: LoginPageProps) {
+export default function LoginPage() {
 
   const navigate = useNavigate();
 
@@ -48,7 +45,6 @@ export default function LoginPage( {setToken}: LoginPageProps) {
 
       if (error) throw error
       console.log(data)
-      setToken(data)
       navigate('/leaderDashboard')
       
     } catch (error) {

@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom"
 import LoginPage from "./pages/login"
-import { useEffect, useState } from "react"
 import LeaderDashboard from "./pages/leaderDashboard"
 import ScoutManagement from "./pages/ScoutManagement"
 import Addleaders from "./pages/Addleader"
@@ -8,27 +7,13 @@ import ScoutDashboard from "./pages/scoutDashboard"
 import type { User } from "@supabase/supabase-js"
 import PrivateRoute from "./components/PrivateRoute"
 import AuthHelper from "./Authhelper"
+import { useState } from "react"
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
   const [userRole, setUserRole] = useState("")
   const [loading, setLoading] = useState(true)
 
-  const [token, setToken] = useState({})
-
-  if(token){
-    sessionStorage.setItem('token',JSON.stringify(token))
-  }
-
-  useEffect(() => {
-    const storedToken = sessionStorage.getItem('token');
-    if(storedToken){
-      const data = JSON.parse(storedToken)
-      setToken(data)
-    }
-    
-    
-  }, [])
 
   return (
     <>
@@ -40,7 +25,7 @@ function App() {
     />
     <Routes>
       <Route path="/login" element={
-          <LoginPage setToken={setToken}/>} />
+          <LoginPage/>} />
 
       <Route path="/leaderDashboard" element={
         <PrivateRoute 
