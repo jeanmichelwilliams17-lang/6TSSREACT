@@ -8,6 +8,8 @@ import type { User } from "@supabase/supabase-js"
 import PrivateRoute from "./components/PrivateRoute"
 import AuthHelper from "./Authhelper"
 import { useState } from "react"
+import RegisterUser from "./pages/Register"
+import AttendanceLeaders from "./pages/AttendanceLeaders"
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
@@ -26,6 +28,13 @@ function App() {
     <Routes>
       <Route path="/login" element={
           <LoginPage/>} />
+      
+      <Route path="/register" element={
+        <PrivateRoute 
+        allowedRoles={['scout', 'leader']} user={user} userRole={userRole} loading={loading}>
+        <RegisterUser />
+        </PrivateRoute>
+      } />
 
       <Route path="/leaderDashboard" element={
         <PrivateRoute 
@@ -37,6 +46,13 @@ function App() {
         <PrivateRoute 
         allowedRoles={['leader']} user={user} userRole={userRole} loading={loading}>
         <ScoutManagement />
+        </PrivateRoute>
+      } />
+
+      <Route path="/leaderDashboard/addattendance" element={
+        <PrivateRoute 
+        allowedRoles={['leader']} user={user} userRole={userRole} loading={loading}>
+        <AttendanceLeaders />
         </PrivateRoute>
       } />
 

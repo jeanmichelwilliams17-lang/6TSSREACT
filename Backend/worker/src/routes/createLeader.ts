@@ -34,7 +34,7 @@ createLeader.post("/", async (c) => {
 
   const supabase = getSupabase(c.env.SUPABASE_URL, c.env.SUPABASE_SERVICE_ROLE_KEY);
   const addedLeader = await c.req.json();
-  const { data, error } = await supabase.auth.admin.inviteUserByEmail(addedLeader.email)
+  const { data, error } = await supabase.auth.admin.inviteUserByEmail(addedLeader.email,{redirectTo:'http://localhost:5173/register'})
 
   const SupaId = data.user?.id;
   console.log(data.user?.id);

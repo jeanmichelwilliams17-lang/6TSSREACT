@@ -16,6 +16,7 @@ return(
         <li><a href="/leaderDashboard" className="text-white hover:text-gray-300">Dashboard</a></li>
         <li><a href="/leaderDashboard/managescouts" className="text-white hover:text-gray-300">Scout Management</a></li>
         <li><a href="/leaderDashboard/addleaders" className="text-white hover:text-gray-300">Add Leader</a></li>
+        <li><a href="/leaderDashboard/addattendance" className="text-white hover:text-gray-300">Add Attendance</a></li>
       </ul>
     </nav>
   </div>

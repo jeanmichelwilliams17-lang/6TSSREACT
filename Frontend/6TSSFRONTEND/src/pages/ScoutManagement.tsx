@@ -1,7 +1,6 @@
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -11,6 +10,7 @@ import type { Scoutmanagementscout } from "@/Types/DB_types";
 import { useEffect, useState } from "react";
 import AddScoutForm from "@/components/AddScoutForm";
 import { Card } from "@/components/ui/card";
+import RowForTable from "@/components/TableRow";
 
 
 
@@ -50,16 +50,12 @@ export default function ScoutManagement(){
           <TableHead>Last Name</TableHead>
           <TableHead>Crew</TableHead>
           <TableHead className="text-center">Rank</TableHead>
+          <TableHead className="text-center">Actions</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {data.map((data) => (
-          <TableRow key={data.id}>
-            <TableCell className="font-medium">{data.first_name}</TableCell>
-            <TableCell>{data.last_name}</TableCell>
-            <TableCell>{data.crew}</TableCell>
-            <TableCell className="text-center">{data.rank}</TableCell>
-          </TableRow>
+          <RowForTable data={data} setData={setData}></RowForTable>
         ))}
       </TableBody>
       

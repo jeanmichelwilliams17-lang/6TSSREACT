@@ -90,7 +90,7 @@ export default function AddScoutForm({setData}: AddScoutFormProps) {
           },
           body: JSON.stringify(data),
         }
-        );
+      );
        if (!response.ok) {
           throw new Error("failed to send scout");
         }

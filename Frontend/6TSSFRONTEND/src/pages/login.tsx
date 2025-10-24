@@ -12,9 +12,9 @@ import { Label } from "@/components/ui/label"
 import { supabase } from "@/lib/supabaseClient"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import LOGO from "../assets/6TSSLOGO.png"
+import Header from "@/components/Header"
 
-
+const backendApi = import.meta.env.VITE_BACKEND_API; 
 
 export default function LoginPage() {
 
@@ -36,33 +36,40 @@ export default function LoginPage() {
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>){
     e.preventDefault()
+    try{
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: formData.email,
+      password: formData.password,
+    })
+    if (error) throw error;
+    if (!data.user?.id) throw new Error("No user ID found");
+    const userId = data.user.id;
 
-    try {
-        const { data, error } = await supabase.auth.signInWithPassword({
-            email: formData.email,
-            password: formData.password,
-          })
-
-      if (error) throw error
-      console.log(data)
-      navigate('/leaderDashboard')
-      
-    } catch (error) {
-      alert(error)
+    const response = await fetch(`${backendApi}/getRole/${userId}`);
+    if (!response.ok) {
+      throw new Error("Failed to fetch Role");
     }
+    const userRoleObj = await response.json();
+    const userRole = userRoleObj.role;
+    if (userRole === "scout"){
+      navigate("/scoutDashboard")
+    }else if (userRole === "leader"){
+      navigate("/leaderDashboard")
+    }else{
+      navigate("/login")
+    }
+      
+    }catch (err) {
+      console.error(err);
+      alert(err);
+    } 
   }
 
 
   return (
     <>
 
-    <header className="bg-blue-600 p-4">
-    <div className="grid grid-cols-[auto_1fr] items-center gap-3">
-      <img src={LOGO} alt="6TSSLOGO" className="size-15" />
-      <p className="text-white text-2xl font-semibold">Tobattendance</p>
-
-    </div>
-</header>
+    <Header></Header>
 
     <div className="flex items-center justify-center h-screen">
 
